@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bang-Bonus — Investment Plans</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Bang-Bonus</h1>
+    <div id="user-area">
+      <span id="balance">Balance: —</span>
+      <button id="logoutBtn" style="display:none">Logout</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="auth">
+      <div class="box">
+        <h2>Signup</h2>
+        <input id="su-email" placeholder="Email" />
+        <input id="su-pass" type="password" placeholder="Password" />
+        <button id="signupBtn">Sign up</button>
+      </div>
+
+      <div class="box">
+        <h2>Login</h2>
+        <input id="li-email" placeholder="Email" />
+        <input id="li-pass" type="password" placeholder="Password" />
+        <button id="loginBtn">Login</button>
+      </div>
+    </section>
+
+    <section id="plans">
+      <h2>Plans (Click to Buy)</h2>
+      <div class="plans-row">
+        <div class="plan" data-amount="5000">
+          <h3>Plan 1</h3>
+          <p>Price: Rs 5,000</p>
+          <button class="buyBtn">Buy</button>
+        </div>
+
+        <div class="plan" data-amount="50000">
+          <h3>Plan 2</h3>
+          <p>Price: Rs 50,000</p>
+          <button class="buyBtn">Buy</button>
+        </div>
+
+        <div class="plan" data-amount="100000">
+          <h3>Plan 3</h3>
+          <p>Price: Rs 100,000</p>
+          <button class="buyBtn">Buy</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
