@@ -6,6 +6,12 @@
   <title>Bang-Bonus — Investment Plans</title>
   <link rel="stylesheet" href="/styles.css" />
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f7fb;
+    }
     header {
       background: #007bff; /* Blue color */
       color: white;
@@ -14,24 +20,35 @@
       justify-content: space-between;
       align-items: center;
     }
+    main {
+      padding: 20px;
+    }
     .plans-row {
       display: flex;
       gap: 20px;
       margin-top: 30px;
+      justify-content: center;
     }
     .plan {
       background: white;
-      flex: 1;
+      width: 150px;       /* half width */
+      height: 300px;      /* double height */
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       padding: 20px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .plan h3 {
       margin-bottom: 10px;
     }
+    .plan p {
+      margin: 10px 0;
+    }
     .plan button {
-      margin-top: 10px;
+      margin-top: auto;
       padding: 10px 15px;
       background: #007bff;
       color: white;
