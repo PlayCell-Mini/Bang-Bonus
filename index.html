@@ -56,6 +56,7 @@
       width: 260px;
       height: 420px;
       perspective: 1000px;
+      position: relative;
     }
 
     .flip-card-inner {
@@ -65,6 +66,7 @@
       text-align: center;
       transition: transform 0.8s;
       transform-style: preserve-3d;
+      border-radius: 12px;
     }
 
     .flip-card:hover .flip-card-inner {
@@ -84,6 +86,20 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
+    }
+
+    .flip-card-front {
+      z-index: 2;
+      transform: rotateY(0deg);
+    }
+
+    .flip-card-back {
+      transform: rotateY(180deg);
+      background: #007bff;
+      color: white;
+      text-align: left;
+      font-size: 0.95rem;
+      z-index: 1;
     }
 
     .flip-card-front h3 {
@@ -110,15 +126,6 @@
 
     .flip-card-front button:hover {
       background: #0056b3;
-    }
-
-    /* Back side */
-    .flip-card-back {
-      transform: rotateY(180deg);
-      background: #007bff;
-      color: white;
-      text-align: left;
-      font-size: 0.95rem;
     }
 
     .flip-card-back h3 {
@@ -174,16 +181,16 @@
       <h2>Choose Your Plan</h2>
       <div class="plans-row">
 
-        <!-- Plan 1 -->
+        <!-- Silver Plan -->
         <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <h3>Plan 1</h3>
+              <h3>Silver Plan</h3>
               <p>Price: Rs 500</p>
               <button>Subscribe</button>
             </div>
             <div class="flip-card-back">
-              <h3>Plan 1 Details</h3>
+              <h3>Silver Plan Details</h3>
               <ul>
                 <li>Price: Rs 500</li>
                 <li>Profit: 60%</li>
@@ -196,16 +203,16 @@
           </div>
         </div>
 
-        <!-- Plan 2 -->
+        <!-- Gold Plan -->
         <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <h3>Plan 2</h3>
+              <h3>Gold Plan</h3>
               <p>Price: Rs 5,000</p>
               <button>Subscribe</button>
             </div>
             <div class="flip-card-back">
-              <h3>Plan 2 Details</h3>
+              <h3>Gold Plan Details</h3>
               <ul>
                 <li>Price: Rs 5,000</li>
                 <li>Profit: 75%</li>
@@ -218,16 +225,16 @@
           </div>
         </div>
 
-        <!-- Plan 3 -->
+        <!-- Diamond Plan -->
         <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <h3>Plan 3</h3>
+              <h3>Diamond Plan</h3>
               <p>Price: Rs 10,000</p>
               <button>Subscribe</button>
             </div>
             <div class="flip-card-back">
-              <h3>Plan 3 Details</h3>
+              <h3>Diamond Plan Details</h3>
               <ul>
                 <li>Price: Rs 10,000</li>
                 <li>Profit: 100%</li>
