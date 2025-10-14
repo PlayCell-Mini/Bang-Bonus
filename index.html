@@ -33,30 +33,36 @@
       font-size: 0.9rem;
     }
 
-    /* ===== Main & Plans ===== */
+    /* ===== Main ===== */
     main {
-      padding: 20px;
+      padding: 30px 20px;
       text-align: center;
     }
 
     h2 {
-      margin-bottom: 20px;
+      margin-bottom: 40px;
+      font-size: 1.8rem;
+      color: #333;
     }
 
+    /* ===== Plans Container ===== */
     .plans-row {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 50px; /* 🟢 Increased space between boxes */
       flex-wrap: wrap;
+      margin-top: 20px;
+      margin-bottom: 60px; /* 🟢 Extra bottom margin */
     }
 
-    /* ===== Flip Card Style ===== */
+    /* ===== Flip Card ===== */
     .flip-card {
       background-color: transparent;
       width: 260px;
       height: 420px;
       perspective: 1000px;
       position: relative;
+      margin: 20px; /* 🟢 Adds spacing around each card */
     }
 
     .flip-card-inner {
@@ -73,14 +79,14 @@
       transform: rotateY(180deg);
     }
 
-    .flip-card-front, .flip-card-back {
+    .flip-card-front,
+    .flip-card-back {
       position: absolute;
       width: 100%;
       height: 100%;
       backface-visibility: hidden;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      background: white;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -89,6 +95,7 @@
     }
 
     .flip-card-front {
+      background: white;
       z-index: 2;
       transform: rotateY(0deg);
     }
@@ -143,11 +150,12 @@
       margin: 6px 0;
     }
 
-    /* ===== Responsive Design ===== */
+    /* ===== Responsive ===== */
     @media (max-width: 768px) {
       .plans-row {
         flex-direction: column;
         align-items: center;
+        gap: 30px; /* 🟢 more vertical space for mobile */
       }
       .flip-card {
         width: 85%;
@@ -190,7 +198,7 @@
               <button>Subscribe</button>
             </div>
             <div class="flip-card-back">
-              <h3>Silver Plan</h3>
+              <h3>Silver Plan Details</h3>
               <ul>
                 <li>Price: Rs 500</li>
                 <li>Profit: 60%</li>
@@ -212,7 +220,7 @@
               <button>Subscribe</button>
             </div>
             <div class="flip-card-back">
-              <h3>Gold Plan</h3>
+              <h3>Gold Plan Details</h3>
               <ul>
                 <li>Price: Rs 5,000</li>
                 <li>Profit: 75%</li>
@@ -234,7 +242,7 @@
               <button>Subscribe</button>
             </div>
             <div class="flip-card-back">
-              <h3>Diamond Plan</h3>
+              <h3>Diamond Plan Details</h3>
               <ul>
                 <li>Price: Rs 10,000</li>
                 <li>Profit: 100%</li>
