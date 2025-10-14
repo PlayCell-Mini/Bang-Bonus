@@ -24,26 +24,12 @@
       flex-wrap: wrap;
     }
 
-    header h1 {
-      font-size: 1.5rem;
-      margin: 0;
-    }
-
-    #user-area {
-      font-size: 0.9rem;
-    }
+    header h1 { font-size: 1.5rem; margin: 0; }
+    #user-area { font-size: 0.9rem; }
 
     /* ===== Main ===== */
-    main {
-      padding: 30px 20px;
-      text-align: center;
-    }
-
-    h2 {
-      margin-bottom: 40px;
-      font-size: 1.8rem;
-      color: #333;
-    }
+    main { padding: 30px 20px; text-align: center; }
+    h2 { margin-bottom: 40px; font-size: 1.8rem; color: #333; }
 
     /* ===== Plans Container ===== */
     .plans-row {
@@ -55,13 +41,11 @@
       margin-bottom: 60px;
     }
 
-    /* ===== Flip Card ===== */
+    /* ===== Flip Card (fixed hide issue) ===== */
     .flip-card {
-      background-color: transparent;
       width: 260px;
       height: 420px;
-      perspective: 1000px;
-      position: relative;
+      perspective: 1200px;
       margin: 20px;
     }
 
@@ -69,22 +53,27 @@
       position: relative;
       width: 100%;
       height: 100%;
-      text-align: center;
       transition: transform 0.8s;
       transform-style: preserve-3d;
       border-radius: 12px;
+      /* ensure children render in 3D */
+      -webkit-transform-style: preserve-3d;
+      -webkit-perspective: 1200px;
     }
 
-    .flip-card:hover .flip-card-inner {
+    /* Flip on hover (and on touch devices, also toggle by adding .flipped class via JS if needed) */
+    .flip-card:hover .flip-card-inner,
+    .flip-card.flipped .flip-card-inner {
       transform: rotateY(180deg);
     }
 
-    .flip-card-front,
-    .flip-card-back {
+    /* Faces */
+    .flip-face {
       position: absolute;
       width: 100%;
       height: 100%;
-      backface-visibility: hidden;
+      left: 0;
+      top: 0;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       display: flex;
@@ -92,59 +81,44 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    /* Front face — visible normally */
+    .flip-front {
+      transform: rotateY(0deg);
+      /* No z-index so back becomes visible when rotated */
+    }
+
+    /* Back face — rotated so it shows when inner is rotated */
+    .flip-back {
+      transform: rotateY(180deg);
+      /* center text on back */
+      text-align: center;
     }
 
     /* ===== Theme Colors ===== */
     /* Silver */
-    .silver-front {
-      background: linear-gradient(145deg, #c0c0c0, #e0e0e0);
-      color: #333;
-    }
-    .silver-back {
-      background: linear-gradient(145deg, #9ea1a3, #c0c0c0);
-      color: white;
-    }
-    .silver-btn {
-      background: #7f8c8d;
-    }
-    .silver-btn:hover {
-      background: #626d70;
-    }
+    .silver-front { background: linear-gradient(145deg,#c0c0c0,#e0e0e0); color:#111; }
+    .silver-back  { background: linear-gradient(145deg,#9ea1a3,#c0c0c0); color:#fff; }
+    .silver-btn   { background:#7f8c8d; }
+    .silver-btn:hover { background:#626d70; }
 
     /* Gold */
-    .gold-front {
-      background: linear-gradient(145deg, #ffd700, #ffea70);
-      color: #5c4500;
-    }
-    .gold-back {
-      background: linear-gradient(145deg, #c8a100, #ffd700);
-      color: white;
-    }
-    .gold-btn {
-      background: #b8860b;
-    }
-    .gold-btn:hover {
-      background: #8b6c0c;
-    }
+    .gold-front { background: linear-gradient(145deg,#ffd700,#ffea70); color:#4b3300; }
+    .gold-back  { background: linear-gradient(145deg,#c8a100,#ffd700); color:#fff; }
+    .gold-btn   { background:#b8860b; }
+    .gold-btn:hover { background:#8b6c0c; }
 
     /* Diamond */
-    .diamond-front {
-      background: linear-gradient(145deg, #5dade2, #3498db);
-      color: white;
-    }
-    .diamond-back {
-      background: linear-gradient(145deg, #2e86c1, #5dade2);
-      color: white;
-    }
-    .diamond-btn {
-      background: #2e86c1;
-    }
-    .diamond-btn:hover {
-      background: #1f618d;
-    }
+    .diamond-front { background: linear-gradient(145deg,#5dade2,#3498db); color:#fff; }
+    .diamond-back  { background: linear-gradient(145deg,#2e86c1,#5dade2); color:#fff; }
+    .diamond-btn   { background:#2e86c1; }
+    .diamond-btn:hover { background:#1f618d; }
 
-    /* ===== Common Button Style ===== */
-    button {
+    /* ===== Buttons common style ===== */
+    .plan-btn {
       margin-top: 20px;
       padding: 12px 18px;
       color: white;
@@ -152,41 +126,28 @@
       border-radius: 6px;
       font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background .25s ease;
     }
+
+    /* ===== Back content styling ===== */
+    .flip-back ul { list-style: none; padding: 0; margin: 0 0 10px 0; text-align:left; line-height:1.5; }
+    .flip-back li { margin: 6px 0; }
 
     /* ===== Responsive ===== */
     @media (max-width: 768px) {
-      .plans-row {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-      }
-      .flip-card {
-        width: 85%;
-        height: 380px;
-      }
+      .plans-row { flex-direction: column; align-items: center; gap: 30px; }
+      .flip-card { width: 85%; height: 380px; }
     }
-
     @media (max-width: 480px) {
-      .flip-card {
-        width: 95%;
-        height: 340px;
-      }
-      button {
-        font-size: 0.9rem;
-        padding: 10px 12px;
-      }
+      .flip-card { width: 95%; height: 340px; }
+      .plan-btn { font-size: 0.95rem; padding: 10px 12px; }
     }
   </style>
 </head>
-
 <body>
   <header>
     <h1>Bang-Bonus</h1>
-    <div id="user-area">
-      <span id="balance">Balance: —</span>
-    </div>
+    <div id="user-area"><span id="balance">Balance: —</span></div>
   </header>
 
   <main>
@@ -194,15 +155,15 @@
       <h2>Choose Your Plan</h2>
       <div class="plans-row">
 
-        <!-- Silver Plan -->
-        <div class="flip-card">
+        <!-- Silver -->
+        <div class="flip-card" id="card-silver">
           <div class="flip-card-inner">
-            <div class="flip-card-front silver-front">
+            <div class="flip-face flip-front silver-front">
               <h3>Silver Plan</h3>
               <p>Price: Rs 500</p>
-              <button class="silver-btn">Subscribe</button>
+              <button class="plan-btn silver-btn" data-plan="silver" data-amount="500">Subscribe</button>
             </div>
-            <div class="flip-card-back silver-back">
+            <div class="flip-face flip-back silver-back">
               <h3>Silver Plan Details</h3>
               <ul>
                 <li>Price: Rs 500</li>
@@ -212,20 +173,20 @@
                 <li>Subscription Reward: No</li>
                 <li>Daily Login Reward: No</li>
               </ul>
-              <button class="silver-btn">Subscribe</button>
+              <button class="plan-btn silver-btn" data-plan="silver" data-amount="500">Subscribe</button>
             </div>
           </div>
         </div>
 
-        <!-- Gold Plan -->
-        <div class="flip-card">
+        <!-- Gold -->
+        <div class="flip-card" id="card-gold">
           <div class="flip-card-inner">
-            <div class="flip-card-front gold-front">
+            <div class="flip-face flip-front gold-front">
               <h3>Gold Plan</h3>
               <p>Price: Rs 5,000</p>
-              <button class="gold-btn">Subscribe</button>
+              <button class="plan-btn gold-btn" data-plan="gold" data-amount="5000">Subscribe</button>
             </div>
-            <div class="flip-card-back gold-back">
+            <div class="flip-face flip-back gold-back">
               <h3>Gold Plan Details</h3>
               <ul>
                 <li>Price: Rs 5,000</li>
@@ -235,20 +196,20 @@
                 <li>Subscription Reward: No</li>
                 <li>Daily Login Reward: No</li>
               </ul>
-              <button class="gold-btn">Subscribe</button>
+              <button class="plan-btn gold-btn" data-plan="gold" data-amount="5000">Subscribe</button>
             </div>
           </div>
         </div>
 
-        <!-- Diamond Plan -->
-        <div class="flip-card">
+        <!-- Diamond -->
+        <div class="flip-card" id="card-diamond">
           <div class="flip-card-inner">
-            <div class="flip-card-front diamond-front">
+            <div class="flip-face flip-front diamond-front">
               <h3>Diamond Plan</h3>
               <p>Price: Rs 10,000</p>
-              <button class="diamond-btn">Subscribe</button>
+              <button class="plan-btn diamond-btn" data-plan="diamond" data-amount="10000">Subscribe</button>
             </div>
-            <div class="flip-card-back diamond-back">
+            <div class="flip-face flip-back diamond-back">
               <h3>Diamond Plan Details</h3>
               <ul>
                 <li>Price: Rs 10,000</li>
@@ -258,7 +219,7 @@
                 <li>Subscription Reward: Rs 10</li>
                 <li>Daily Login Reward: No</li>
               </ul>
-              <button class="diamond-btn">Subscribe</button>
+              <button class="plan-btn diamond-btn" data-plan="diamond" data-amount="10000">Subscribe</button>
             </div>
           </div>
         </div>
@@ -266,5 +227,27 @@
       </div>
     </section>
   </main>
+
+  <script>
+    // Mobile/touch friendly: toggle flip on tap (so users can see back on touch)
+    document.querySelectorAll('.flip-card').forEach(card=>{
+      card.addEventListener('click', (e)=>{
+        // If user clicked a button, don't toggle flip
+        if (e.target.closest('button')) return;
+        card.classList.toggle('flipped');
+      });
+    });
+
+    // Example: hook subscribe buttons (currently just shows alert)
+    document.querySelectorAll('.plan-btn').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const plan = btn.dataset.plan;
+        const amount = btn.dataset.amount;
+        alert(`Subscribe clicked: ${plan.toUpperCase()} — Rs ${amount}`);
+        // here you can open modal / navigate to payment page and pass amount
+      });
+    });
+  </script>
 </body>
 </html>
